@@ -69,6 +69,8 @@ public class TelaLogin extends javax.swing.JFrame {
         initComponents();
     
         conexao = ModuloConexao.conector();
+        txtMail.setText("mdavel@findes.org.br");
+        txtSenha.setText("123*abc");
 
 
     }

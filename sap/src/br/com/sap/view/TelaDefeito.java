@@ -8,6 +8,7 @@ package br.com.sap.view;
 import br.com.sap.dao.ModuloConexao;
 import javax.swing.JOptionPane;
 import java.sql.*;
+import br.com.sap.controler.TelaDefeitoController;
 
 /**
  *
@@ -66,29 +67,12 @@ public class TelaDefeito extends javax.swing.JInternalFrame {
                 
     }
     
-    public void cadastro(){
-        
-        String sql = "insert into registro_defeito (data, id_Equipamento, idTipoDefeito, horaInicial, horaFinal) values(?,?,?,?,?)";
-        
-        try {
-            pst = conexao.prepareStatement(sql);
-            pst.setString(1, txtData.getDateFormatString());
-            pst.setString(2, cbbEquipamento.getSelectedItem().toString());
-            pst.setString(3, cbbDefeito.getSelectedItem().toString());
-            
-            if (rootPaneCheckingEnabled) {
-                
-            } else {
-                
-                
-            }
-        } catch (Exception e) {
-        }
-                
-    }
-    
-        
-    /**
+       public void limpar_campos(){
+       txtInicio.setText(null);
+       txtFim.setText(null);
+       
+   } 
+       /**
      * Creates new form TelaDefeito
      */
     public TelaDefeito() {
@@ -155,9 +139,19 @@ public class TelaDefeito extends javax.swing.JInternalFrame {
 
         btnLimpar.setBackground(new java.awt.Color(102, 102, 255));
         btnLimpar.setText("Limpar");
+        btnLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimparActionPerformed(evt);
+            }
+        });
 
         btnSalvar.setBackground(new java.awt.Color(102, 102, 255));
         btnSalvar.setText("Salvar");
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarActionPerformed(evt);
+            }
+        });
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/sap/icones/logo (1).png"))); // NOI18N
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -250,20 +244,32 @@ public class TelaDefeito extends javax.swing.JInternalFrame {
         setBounds(0, 0, 708, 554);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+        // TODO add your handling code here:
+        
+        TelaDefeitoController defeito = new TelaDefeitoController();
+        defeito.salvar();
+    }//GEN-LAST:event_btnSalvarActionPerformed
+
+    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
+        // TODO add your handling code here:
+        limpar_campos();
+    }//GEN-LAST:event_btnLimparActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLimpar;
     private javax.swing.JButton btnSalvar;
-    private javax.swing.JComboBox<String> cbbDefeito;
-    private javax.swing.JComboBox<String> cbbEquipamento;
+    public static javax.swing.JComboBox<String> cbbDefeito;
+    public static javax.swing.JComboBox<String> cbbEquipamento;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel lblData;
     private javax.swing.JLabel lblEquipamento;
     private javax.swing.JLabel lblFim;
     private javax.swing.JLabel lblInicio;
-    private com.toedter.calendar.JDateChooser txtData;
-    private javax.swing.JFormattedTextField txtFim;
-    private javax.swing.JFormattedTextField txtInicio;
+    public static com.toedter.calendar.JDateChooser txtData;
+    public static javax.swing.JFormattedTextField txtFim;
+    public static javax.swing.JFormattedTextField txtInicio;
     // End of variables declaration//GEN-END:variables
 }
