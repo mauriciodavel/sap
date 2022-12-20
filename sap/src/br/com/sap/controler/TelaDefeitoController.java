@@ -3,6 +3,8 @@ package br.com.sap.controler;
 import java.sql.*;
 import br.com.sap.dao.ModuloConexao;
 import br.com.sap.view.TelaDefeito;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 
 /**
@@ -23,7 +25,7 @@ public class TelaDefeitoController {
 
     TelaDefeito defeito = new TelaDefeito();
     
-    
+      
     //Criando o método para o botão salvar
     public void salvar() {
 
@@ -35,11 +37,16 @@ public class TelaDefeitoController {
 
             pst = conexao.prepareStatement(sql);
             System.out.println("1");
-            //pst.setString(1, sql);
-            pst.setString(1, TelaDefeito.txtData.getDate().toString());
+            
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+            TelaDefeito.txtData1.setText(df.format(TelaDefeito.txtData.getDate()));
+            //TelaDefeito.txtData1.getText();
+            pst.setString(1, TelaDefeito.txtData1.getText());
             System.out.println("2");
             pst.setString(2, TelaDefeito.cbbEquipamento.getSelectedItem().toString());
+            System.out.println("3");
             pst.setString(3, TelaDefeito.cbbDefeito.getSelectedItem().toString());
+            System.out.println("4");
             pst.setString(4, TelaDefeito.txtInicio.getText());
             pst.setString(5, TelaDefeito.txtFim.getText());
 
